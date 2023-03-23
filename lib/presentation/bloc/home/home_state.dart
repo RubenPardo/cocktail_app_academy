@@ -1,3 +1,4 @@
+import 'package:cocktail_app_academy/data/model/category.dart';
 import 'package:cocktail_app_academy/data/model/drink.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,8 +17,9 @@ class HomeError extends HomeState{
 
 class HomeContentLoaded extends HomeState{
   final List<Drink> drinks;
-  HomeContentLoaded(this.drinks);
+  final List<Category> categories;
+  HomeContentLoaded(this.drinks,this.categories);
 
   @override
-  List<Object?> get props => [drinks];
+  List<Object?> get props => [drinks,categories];
 }

@@ -30,7 +30,27 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
           categories = await _cocktailApiService.getCategories();
           drinks = await _cocktailApiService.getDrinksByCategory(categories.first);
 
-          emit(HomeContentLoaded(drinks));  // -------- return drinks      
+          emit(HomeContentLoaded(drinks,categories));  // -------- return drinks      
+
+        }catch(e){
+          print("ERROR: $e");
+          emit(HomeError("Error inseperado")); // ----- return error
+        }
+        
+        
+      },
+    );
+
+    /// filter the drinks by category
+    on<FilterByDrinkCategory>( //----------------------------------
+      (event, emit) async{
+        emit(HomeLoading());
+        
+        try{
+          
+          drinks = await _cocktailApiService.getDrinksByCategory(event.category);
+
+          emit(HomeContentLoaded(drinks,categories));  // -------- return drinks      
 
         }catch(e){
           print("ERROR: $e");
