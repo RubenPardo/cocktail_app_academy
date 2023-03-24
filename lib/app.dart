@@ -1,3 +1,4 @@
+import 'package:cocktail_app_academy/presentation/bloc/drink_info/drink_info_bloc.dart';
 import 'package:cocktail_app_academy/presentation/bloc/home/home_bloc.dart';
 import 'package:cocktail_app_academy/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()), 
+        BlocProvider(create: (context) => DrinkInfoBloc()), 
       ],
       child:  MaterialApp(
         theme: ThemeData(

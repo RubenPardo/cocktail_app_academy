@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               }
             });
           }else if(state is HomeRandomDrinkObtained){
-            Navigator.push(context,MaterialPageRoute( builder: (context) =>  DrinkInfoPage(drinkInfo: state.drink,heroTag: "",)));
+            Navigator.push(context,MaterialPageRoute( builder: (context) =>  DrinkInfoPage(drinkInfo: state.drink,heroTag: "",loadMoreInfo: false,)));
 
           }
         },
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
           _title = "${value.name}";
         });
         if(mounted){
-          //context.read<HomeBloc>().add(FilterByDrinkCategory(value));
+          context.read<HomeBloc>().add(FilterByDrinkCategory(value));
         }
       },
     );

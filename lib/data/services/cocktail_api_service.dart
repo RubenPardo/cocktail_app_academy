@@ -10,6 +10,7 @@ abstract class CocktailApiService{
   /// get all drinks by category
   Future<List<Drink>> getDrinksByCategory(Category category);
   Future<DrinkInfo> getRandomDrink();
+  Future<DrinkInfo>getDrinkInfoById(String idDrink);
   
 
 
@@ -42,6 +43,16 @@ class CocktailApiServiceImpl extends CocktailApiService{
   @override
   Future<DrinkInfo> getRandomDrink() async{
     var apiResponse = await _request.get('random.php');
+    if(apiResponse.statusCode == 200){
+      return DrinkInfo.fromJson((apiResponse.data['drinks'] as List)[0]);
+    }else{
+      throw Exception("Error en CocktailApiService getDrinksByCategory. StatusCode: ${apiResponse.statusCode} Data: ${apiResponse.data}");
+    }
+  }
+  
+  @override
+  Future<DrinkInfo> getDrinkInfoById(String idDrink) async{
+    var apiResponse = await _request.get('lookup.php?i=$idDrink');
     if(apiResponse.statusCode == 200){
       return DrinkInfo.fromJson((apiResponse.data['drinks'] as List)[0]);
     }else{
