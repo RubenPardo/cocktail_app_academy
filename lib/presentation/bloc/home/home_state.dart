@@ -1,5 +1,6 @@
 import 'package:cocktail_app_academy/data/model/category.dart';
 import 'package:cocktail_app_academy/data/model/drink.dart';
+import 'package:cocktail_app_academy/data/model/drink_info.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class HomeState extends Equatable{}
@@ -22,4 +23,12 @@ class HomeContentLoaded extends HomeState{
 
   @override
   List<Object?> get props => [drinks,categories];
+}
+
+class HomeRandomDrinkObtained extends HomeState{
+  final DrinkInfo drink;
+  HomeRandomDrinkObtained(this.drink);
+
+  @override
+  List<Object?> get props => [drink];
 }

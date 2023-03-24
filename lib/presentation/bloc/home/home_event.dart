@@ -8,11 +8,9 @@ class InitHome extends HomeEvent{
   List<Object?> get props => [];
 }
 
-class FilterByDrinkName extends HomeEvent{
-  final String name;
-  FilterByDrinkName(this.name);
+class GetRandomDrink extends HomeEvent{
   @override
-  List<Object?> get props => [name];
+  List<Object?> get props => [];
 }
 
 class FilterByDrinkCategory extends HomeEvent{

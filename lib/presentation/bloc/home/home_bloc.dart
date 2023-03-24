@@ -1,5 +1,6 @@
 import 'package:cocktail_app_academy/data/model/category.dart';
 import 'package:cocktail_app_academy/data/model/drink.dart';
+import 'package:cocktail_app_academy/data/model/drink_info.dart';
 import 'package:cocktail_app_academy/data/services/cocktail_api_service.dart';
 import 'package:cocktail_app_academy/presentation/bloc/home/home_event.dart';
 import 'package:cocktail_app_academy/presentation/bloc/home/home_state.dart';
@@ -51,6 +52,26 @@ class HomeBloc extends Bloc<HomeEvent,HomeState>{
           drinks = await _cocktailApiService.getDrinksByCategory(event.category);
 
           emit(HomeContentLoaded(drinks,categories));  // -------- return drinks      
+
+        }catch(e){
+          print("ERROR: $e");
+          emit(HomeError("Error inseperado")); // ----- return error
+        }
+        
+        
+      },
+    );
+
+    /// get som random drink from the api
+    on<GetRandomDrink>( //----------------------------------
+      (event, emit) async{
+        emit(HomeLoading());
+        
+        try{
+          
+          DrinkInfo drink = await _cocktailApiService.getRandomDrink();
+
+          emit(HomeRandomDrinkObtained(drink));  // -------- return drinks      
 
         }catch(e){
           print("ERROR: $e");
